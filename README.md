@@ -1,2 +1,2 @@
 # jitsi-vue
-jisti meet with vue
+jitsi meet with vue
