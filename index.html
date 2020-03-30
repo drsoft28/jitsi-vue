@@ -1,0 +1,79 @@
+<!doctype html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+  
+
+    <title>Jits-vue</title>
+  
+
+
+
+  
+    
+    <style>
+        #jitsi-container{
+            height:100vh
+        }</style>
+</head>
+<body>
+    <div id="app">
+<div  id="jitsi-container">
+
+</div>
+
+    </div>
+  
+
+ <script src='https://meet.jit.si/external_api.js'></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script>
+const app = new Vue({
+    el:'#app',
+    methods:{
+   startConference() {
+  try {
+   const domain = 'meet.jit.si';
+   const options = {
+     audioInput: '<deviceLabel>',
+        audioOutput: '<deviceLabel>',
+        videoInput: '<deviceLabel>',
+    roomName: 'synpeed',
+    height: 500,
+    parentNode: document.getElementById('jitsi-container'),
+    interfaceConfigOverwrite: {
+     filmStripOnly: false,
+     SHOW_JITSI_WATERMARK: false,
+    },
+    configOverwrite: {
+     disableSimulcast: false,
+    },
+   };
+
+   const api = new JitsiMeetExternalAPI(domain, options);
+   api.addEventListener('videoConferenceJoined', () => {
+    console.log('Local User Joined');
+   
+    api.executeCommand('displayName', 'MyName');
+   });
+  } catch (error) {
+   console.error('Failed to load Jitsi API', error);
+  }
+ }},
+created(){
+
+},
+ mounted()  {
+  // verify the JitsiMeetExternalAPI constructor is added to the global..
+  if (window.JitsiMeetExternalAPI) this.startConference();
+  else alert('Jitsi Meet API script not loaded');
+ }
+    
+})
+
+    </script>
+</body>
+</html>
