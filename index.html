@@ -12,8 +12,8 @@
 
 
 
-  
-    
+
+
     <style>
         #jitsi-container{
             height:100vh
@@ -33,6 +33,11 @@
      <script>
 const app = new Vue({
     el:'#app',
+    data(){
+        return{
+        room:'testroom'
+        }
+    },
     methods:{
    startConference() {
   try {
@@ -41,7 +46,7 @@ const app = new Vue({
      audioInput: '<deviceLabel>',
         audioOutput: '<deviceLabel>',
         videoInput: '<deviceLabel>',
-    roomName: 'testroom',
+    roomName: this.room,
     height: 500,
     parentNode: document.getElementById('jitsi-container'),
     interfaceConfigOverwrite: {
